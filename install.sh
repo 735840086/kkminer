@@ -23,7 +23,7 @@ echo "Please select your language / 请选择语言:"
 # echo ""
 echo "1. 中文"
 # echo ""
-read -p "$(echo -e "[1-2]：")" lang_choice
+read -p "$(echo -e "[1]：")" lang_choice
 
 if [ "$lang_choice" = "2" ]; then
     prompt_title="---------- English Menu ----------"
