@@ -1,7 +1,7 @@
 ﻿#!/bin/bash
 
 VERSION="3.9.4"
-DOWNLOAD_HOST="https://github.com/735840086/kkminer/blob/main"
+DOWNLOAD_HOST="https://raw.githubusercontent.com/735840086/kkminer/blob/main"
 ORIGIN_EXEC="kkminer-${VERSION}"
 
 SERVICE_NAME="kkminerservice"
