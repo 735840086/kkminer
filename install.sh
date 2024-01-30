@@ -1,7 +1,7 @@
 ﻿#!/bin/bash
 
 VERSION="kkminer"
-DOWNLOAD_HOST="https://github.com/EvilGenius-dot/shortcut/raw/main"
+DOWNLOAD_HOST="https://raw.githubusercontent.com/735840086/kkminer/main/kkminer"
 ORIGIN_EXEC="kkminer-${VERSION}"
 
 SERVICE_NAME="kkminerservice"
