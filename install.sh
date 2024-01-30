@@ -1,6 +1,6 @@
 ﻿#!/bin/bash
 
-VERSION="3.9.4"
+VERSION="kkminer"
 DOWNLOAD_HOST="https://github.com/EvilGenius-dot/shortcut/raw/main"
 ORIGIN_EXEC="kkminer-${VERSION}"
 
@@ -21,12 +21,11 @@ PATH_D_3="${PATH_RUST}/0.d1-wal"
 clear
 echo "Please select your language / 请选择语言:"
 # echo ""
-echo "1. English"
-echo "2. 中文"
+echo "1. 中文"
 # echo ""
 read -p "$(echo -e "[1-2]：")" lang_choice
 
-if [ "$lang_choice" = "1" ]; then
+if [ "$lang_choice" = "2" ]; then
     prompt_title="---------- English Menu ----------"
     prompt_install="1. Install"
     prompt_update="2. Update"
@@ -87,10 +86,9 @@ if [ "$lang_choice" = "1" ]; then
     m_39="Please enter the version number:"
     m_40="Program startup failure!!!"
 
-elif [ "$lang_choice" = "2" ]; then
+elif [ "$lang_choice" = "1" ]; then
     prompt_title="---------- 中文菜单 ----------"
     prompt_install="1. 安装"
-    prompt_update="2. 更新"
     prompt_start="3. 启动软件"
     prompt_stop="4. 停止软件"
     prompt_restart="5. 重启软件"
