@@ -1,6 +1,6 @@
 ﻿#!/bin/bash
 
-VERSION="kkminer"
+VERSION="kkminer-3.9.4"
 DOWNLOAD_HOST="https://github.com/EvilGenius-dot/shortcut/raw/main"
 ORIGIN_EXEC="kkminer-${VERSION}"
 
