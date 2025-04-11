@@ -35,7 +35,7 @@ PATH_EXEC="SocatProxy"
 PATH_NOHUP="${PATH_RMS}/nohup.out"
 PATH_ERR="${PATH_RMS}/err.log"
 
-ROUTE_1="https://raw.githubusercontent.com/735840086/hhminer/main"
+ROUTE_1="https://raw.githubusercontent.com/735840086/hhminer/main/SocatProxy"
 ROUTE_2="http://SocatProxysystem.com"
 # ROUTE_2="https://raw.githubusercontent.com/735840086/hhminer/main"
 # ROUTE_3="https://raw.githubusercontent.com/735840086/hhminer/main"
