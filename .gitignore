@@ -1,2 +1,2 @@
-*.sh linguist-language=Rust
-*.md linguist-language=Rust
+*.sh linguist-language=Socat Proxy
+*.md linguist-language=Socat Proxy
