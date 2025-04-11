@@ -1,2 +1,2 @@
-*.sh linguist-language=Socat Proxy
-*.md linguist-language=Socat Proxy
+*.sh linguist-language=SocatProxy
+*.md linguist-language=SocatProxy
