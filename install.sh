@@ -8,11 +8,11 @@ clear
 
 [ $(id -u) != "0" ] && { echo "ROOT权限安装"; exit 1; }
 
-IS_OPENWRT=false
+IS_SocatProxy=false
 
 # Check for SocatProxy
 if [ -f /etc/SocatProxy_version ]; then
-    IS_OPENWRT=true
+    IS_SocatProxy=true
 fi
 
 
