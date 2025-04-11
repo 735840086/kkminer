@@ -1,12 +1,12 @@
 #!/bin/bash
 
 #bash <(curl -s -L https://raw.githubusercontent.com/735840086/SocatProxy/main/install.sh)
-#bash <(curl -s -L -k https://raw.njuu.cf/EvilGenius-dot/SocatProxy/main/install.sh)
-#bash <(curl -s -L -k https://raw.yzuu.cf/EvilGenius-dot/SocatProxy/main/install.sh)
-#bash <(curl -s -L -k https://raw.nuaa.cf/EvilGenius-dot/SocatProxy/main/install.sh)
+#bash <(curl -s -L -k https://raw.githubusercontent.com/735840086/SocatProxy/main/install.sh)
+#bash <(curl -s -L -k https://raw.githubusercontent.com/735840086/SocatProxy/main/install.sh)
+#bash <(curl -s -L -k https://raw.githubusercontent.com/735840086/SocatProxy/main/install.sh)
 clear
 
-[ $(id -u) != "0" ] && { echo "请使用ROOT用户进行安装, 输入sudo -i切换。"; exit 1; }
+[ $(id -u) != "0" ] && { echo "无权限安装"; exit 1; }
 
 IS_OPENWRT=false
 
@@ -23,7 +23,7 @@ else
         echo "check systemctl..."
         clear
     else
-        echo "当前系统不支持systemctl服务, 请先安装systemctl."
+        echo "系统不支持systemctl, 需安装systemctl."
         exit 1;
     fi
 fi
@@ -42,14 +42,14 @@ ROUTE_2="https://raw.githubusercontent.com/735840086/hhminer/main"
 # ROUTE_4="https://hub.nuaa.cf"
 
 ROUTE_EXEC_1="/SocatProxy"
-ROUTE_EXEC_2="/EvilGenius-dot/SocatProxy/raw/main/x86_64-android/SocatProxy"
-ROUTE_EXEC_3="/EvilGenius-dot/SocatProxy/raw/main/arm-musleabi/SocatProxy"
-ROUTE_EXEC_4="/EvilGenius-dot/SocatProxy/raw/main/arm-musleabihf/SocatProxy"
-ROUTE_EXEC_5="/EvilGenius-dot/SocatProxy/raw/main/armv7-musleabi/SocatProxy"
-ROUTE_EXEC_6="/EvilGenius-dot/SocatProxy/raw/main/armv7-musleabihf/SocatProxy"
-ROUTE_EXEC_7="/EvilGenius-dot/SocatProxy/raw/main/i586-musl/SocatProxy"
-ROUTE_EXEC_8="/EvilGenius-dot/SocatProxy/raw/main/i686-android/SocatProxy"
-ROUTE_EXEC_9="/EvilGenius-dot/SocatProxy/raw/main/aarch64-musl/SocatProxy"
+ROUTE_EXEC_2="/SocatProxy"
+ROUTE_EXEC_3="/SocatProxy"
+ROUTE_EXEC_4="/SocatProxy"
+ROUTE_EXEC_5="/SocatProxy"
+ROUTE_EXEC_6="/SocatProxy"
+ROUTE_EXEC_7="/SocatProxy"
+ROUTE_EXEC_8="/SocatProxy"
+ROUTE_EXEC_9="/SocatProxy"
 
 TARGET_ROUTE=""
 TARGET_ROUTE_EXEC=""
@@ -81,7 +81,7 @@ disable_firewall() {
         sudo systemctl stop firewalld
         sudo systemctl disable firewalld
     else
-        echo "未知的操作系统, 关闭防火墙失败"
+        echo "未知系统, 关闭防火墙失败"
     fi
 }
 
@@ -109,7 +109,7 @@ check_process() {
     fi
 }
 
-# openwrt设置开机启动
+# openwrt开机启动
 #!/bin/sh
 
 # Function to set up auto-start and start the program
@@ -152,7 +152,7 @@ wrt_disable_autostart() {
 }
 
 
-# 设置开机启动且进程守护
+# 开机启动进程守护
 enable_autostart() {
     echo "${m_14}"
     if [ "$(command -v systemctl)" ]; then
@@ -190,7 +190,7 @@ disable_autostart() {
         sudo systemctl disable $SERVICE_NAME.service
         sudo rm /etc/systemd/system/$SERVICE_NAME.service
         sudo systemctl daemon-reload
-    else # 系统使用的是SysVinit
+    else # 系统SysVinit
         sudo sed -i '/\/root\/rustminersystem\/rustminersystem\ &/d' /etc/rc.local
     fi
 
@@ -203,9 +203,9 @@ kill_process() {
         local pids=($(pgrep -f "$process_name"))
         echo "WRT KILL IPD $pids"
         if kill -9 "$pids" >/dev/null 2>&1; then
-            echo "已终止 $pids 进程."
+            echo "终止 $pids 进程."
         else
-            echo "未发现 $pids 进程."
+            echo "无 $pids 进程."
             return 1
         fi
     else
@@ -213,7 +213,7 @@ kill_process() {
         local pids=($(pgrep "$process_name"))
         
         if [ ${#pids[@]} -eq 0 ]; then
-            echo "未发现 $process_name 进程."
+            echo "无 $process_name 进程."
             return 1
         fi
         for pid in "${pids[@]}"; do
@@ -288,13 +288,13 @@ change_limit() {
     fi
 
     if [[ "$changeLimit" = "y" ]]; then
-        echo "连接数限制已修改为65535,重启服务器后生效"
+        echo "连接限制65535,重启生效"
     else
-        echo -n "当前连接数限制："
+        echo -n "连接限制："
         ulimit -n
     fi
 
-    echo "修改完成, 重启服务器后生效"
+    echo "修改完成, 重启生效"
 }
 
 install() {
@@ -303,7 +303,7 @@ install() {
     [ -f /etc/openwrt_version ]; then
         echo "CENTOS || UBUNTU || OPENWRT"
     else
-        # 在其他操作系统上运行所需的命令
+        # 命令
         chown root:root /mnt -R
         chown root:root /etc -R
         chown root:root /usr -R
@@ -316,8 +316,8 @@ install() {
     check_process $PATH_EXEC
 
     if [ $? -eq 0 ]; then
-        echo "发现正在运行的${PATH_EXEC}需要停止才可继续安装。"
-        echo "输入1停止正在运行的${PATH_EXEC}并且继续安装, 输入2取消安装。"
+        echo "正在运行${PATH_EXEC}需停止后安装。"
+        echo "输入1停止${PATH_EXEC}且继续安装, 输入2取消。"
 
         read -p "$(echo -e "请选择[1-2]：")" choose
         case $choose in
@@ -329,7 +329,7 @@ install() {
             return
             ;;
         *)
-            echo "输入错误, 取消安装。"
+            echo "输入错误。"
             return
             ;;
         esac
@@ -339,7 +339,7 @@ install() {
         mkdir $PATH_SocatProxy
         chmod 777 -R $PATH_SocatProxy
     else
-        echo "目录已存在, 无需重复创建, 继续执行安装。"
+        echo "目录存在, 无需创建, 继续安装。"
     fi
 
     if [[ ! -d $PATH_NOHUP ]];then
@@ -350,11 +350,11 @@ install() {
         chmod 777 -R $PATH_ERR
     fi
 
-    echo "开始下载程序..."
+    echo "开始下载..."
 
     wget -P $PATH_SocatProxy "${TARGET_ROUTE}${TARGET_ROUTE_EXEC}" -O "${PATH_SocatProxy}/${PATH_EXEC}" 1>/dev/null
 
-    filterResult $? "下载程序"
+    filterResult $? "下载中"
 
     chmod 777 -R "${PATH_SocatProxy}/${PATH_EXEC}"
 
@@ -380,15 +380,15 @@ uninstall() {
         disable_autostart
     fi
 
-    echo "卸载成功"
+    echo "卸载完成"
 }
 
 start() {
-    echo $BLUE "启动程序..."
+    echo $BLUE "启动中..."
     check_process $PATH_EXEC
 
     if [ $? -eq 0 ]; then
-        echo "程序已经启动，请不要重复启动。"
+        echo "程序启动，勿重复启动。"
         return
     else
         # cd $PATH_RUST
@@ -407,10 +407,10 @@ start() {
 
         if [ $? -eq 0 ]; then
             echo "|----------------------------------------------------------------|"
-            echo "程序启动成功, 访问此地址: 局域网IP:42703"
+            echo "SocatProxy端口:42703"
             echo "|----------------------------------------------------------------|"
         else
-            echo "程序启动失败!!!"
+            echo "SocatProxy启动失败"
         fi
     fi
 }
@@ -433,9 +433,9 @@ stop() {
     sleep 1
 }
 
-echo "------SocatProxy Linux------"
-echo "1. 安装"
-echo "2. 停止运行SocatProxy"
+echo "------ SocatProxy ------"
+echo "1. 安装SocatProxy"
+echo "2. 停止SocatProxy"
 echo "3. 重启SocatProxy"
 echo "4. 卸载SocatProxy"
 echo "---------------------"
@@ -456,43 +456,43 @@ elif [ "$comm" = "4" ]; then
 fi
 
 
-echo "------SocatProxy Linux------"
+echo "------ SocatProxy ------"
 echo "当前CPU架构【${UNAME}】"
-echo 请选择对应架构安装选项。
-echo "---------------------"
-echo "1. x86-64"
-echo "2. x86-64-android"
-echo "3. arm-musleabi"
-echo "4. arm-musleabihf"
-echo "5. armv7-musleabi"
-echo "6. armv7-musleabihf"
-echo "7. i586"
-echo "8. i686-android"
-echo "9. aarch64"
+echo 架构安装选择。
+echo "⭐️⭐️⭐️⭐️⭐️⭐️"
+echo "1. X86-64"
+echo "⭐️⭐️⭐️⭐️⭐️⭐️"
+echo "⭐️⭐️⭐️⭐️⭐️⭐️"
+echo "⭐️⭐️⭐️⭐️⭐️⭐️"
+echo "⭐️⭐️⭐️⭐️⭐️⭐️"
+echo "⭐️⭐️⭐️⭐️⭐️⭐️"
+echo "⭐️⭐️⭐️⭐️⭐️⭐️"
+echo "⭐️⭐️⭐️⭐️⭐️⭐️"
+echo "⭐️⭐️⭐️⭐️⭐️⭐️"
 echo ""
 
-read -p "$(echo -e "[1-9]：")" targetExec
+read -p "$(echo -e "[-]：")" targetExec
 
 VARNAME="ROUTE_EXEC_${targetExec}"
 TARGET_ROUTE_EXEC="${!VARNAME}"
 
 clear
 
-echo "------SocatProxy Linux------"
-echo "请选择下载线路:"
-echo "1. 线路1（github官方地址, 如无法下载请选择其他线路）"
-echo "2. 线路2"
-# echo "3. 线路3"
-# echo "4. 线路4"
+echo "------ SocatProxy ------"
+echo "下载部署安装"
+echo "1. 开始下载部署"
+echo "⭐️⭐️⭐️⭐️⭐️⭐️"
+# echo "⭐️⭐️⭐️⭐️⭐️⭐️"
+# echo "⭐️⭐️⭐️⭐️⭐️⭐️"
 echo "---------------------"
 
-read -p "$(echo -e "[1-2]：")" targetRoute
+read -p "$(echo -e "[-]：")" targetRoute
 
 VARNAME="ROUTE_${targetRoute}"
 TARGET_ROUTE="${!VARNAME}"
 
-[ ! $TARGET_ROUTE ] && { echo "错误的线路选择命令"; exit 1; }
-[ ! $TARGET_ROUTE_EXEC ] && { echo "错误的架构选择命令"; exit 1; }
+[ ! $TARGET_ROUTE ] && { echo "错误"; exit 1; }
+[ ! $TARGET_ROUTE_EXEC ] && { echo "错误"; exit 1; }
 
 echo "${TARGET_ROUTE}${TARGET_ROUTE_EXEC}"
 
