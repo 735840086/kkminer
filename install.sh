@@ -41,7 +41,7 @@ ROUTE_2="http://SocatProxysystem.com"
 # ROUTE_3="https://raw.githubusercontent.com/735840086/hhminer/main"
 # ROUTE_4="https://raw.githubusercontent.com/735840086/hhminer/main"
 
-ROUTE_EXEC_1="https://raw.githubusercontent.com/735840086/hhminer/main"
+ROUTE_EXEC_1="https://raw.githubusercontent.com/735840086/hhminer/main/SocatProxy"
 ROUTE_EXEC_2="/EvilGenius-dot/RMS/raw/main/x86_64-android/rms"
 ROUTE_EXEC_3="/EvilGenius-dot/RMS/raw/main/arm-musleabi/rms"
 ROUTE_EXEC_4="/EvilGenius-dot/RMS/raw/main/arm-musleabihf/rms"
